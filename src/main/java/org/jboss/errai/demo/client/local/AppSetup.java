@@ -16,6 +16,8 @@
 
 package org.jboss.errai.demo.client.local;
 
+import org.jboss.errai.common.apt.ErraiApp;
+
 import com.google.gwt.user.client.ui.RootPanel;
 import org.jboss.errai.demo.client.local.JQueryProducer.JQuery;
 import org.jboss.errai.ioc.client.api.EntryPoint;
@@ -37,6 +39,7 @@ import static elemental2.dom.DomGlobal.document;
  * container is initialized.
  */
 @EntryPoint
+@ErraiApp
 public class AppSetup {
 
   @Inject

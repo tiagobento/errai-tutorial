@@ -102,16 +102,17 @@
       <artifactId>errai-cdi-jboss</artifactId>
     </dependency>
 
-   <dependency>
-    <groupId>org.jboss.errai</groupId>
-    <artifactId>errai-cdi-server</artifactId>
-  </dependency>
+    <dependency>
+      <groupId>org.jboss.errai</groupId>
+      <artifactId>errai-cdi-server</artifactId>
+    </dependency>
 
-   <dependency>
-    <groupId>com.google.elemental2</groupId>
-    <artifactId>elemental2-dom</artifactId>
-    <scope>provided</scope>
-  </dependency>
+    <dependency>
+      <groupId>com.google.elemental2</groupId>
+      <artifactId>elemental2-dom</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
   </dependencies>
 
   <build>
@@ -229,7 +230,7 @@
       </plugin>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>2.3.2</version>
+        <version>3.6.2</version>
         <configuration>
           <source>1.8</source>
           <target>1.8</target>
@@ -266,10 +267,24 @@
   </build>
 
   <profiles>
+
+    <profile>
+      <id>apt-generators</id>
+      <dependencies>
+        <dependency>
+          <groupId>org.jboss.errai</groupId>
+          <artifactId>errai-generators-apt</artifactId>
+          <scope>provided</scope>
+        </dependency>
+      </dependencies>
+    </profile>
+
     <profile>
       <id>wildfly</id>
       <activation>
-        <activeByDefault>true</activeByDefault>
+        <property>
+          <name>!skipDefaultProfile</name>
+        </property>
       </activation>
       <build>
         <plugins>
