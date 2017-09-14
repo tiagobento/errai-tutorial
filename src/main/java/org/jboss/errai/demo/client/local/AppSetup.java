@@ -16,7 +16,7 @@
 
 package org.jboss.errai.demo.client.local;
 
-import org.jboss.errai.common.apt.ErraiApp;
+import org.jboss.errai.common.configuration.ErraiApp;
 
 import com.google.gwt.user.client.ui.RootPanel;
 import org.jboss.errai.demo.client.local.JQueryProducer.JQuery;
