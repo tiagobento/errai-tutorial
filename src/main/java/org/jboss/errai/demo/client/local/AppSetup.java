@@ -19,6 +19,7 @@ package org.jboss.errai.demo.client.local;
 import org.jboss.errai.common.configuration.ErraiApp;
 
 import com.google.gwt.user.client.ui.RootPanel;
+import org.jboss.errai.common.configuration.ErraiModule;
 import org.jboss.errai.demo.client.local.JQueryProducer.JQuery;
 import org.jboss.errai.ioc.client.api.EntryPoint;
 import org.jboss.errai.ui.nav.client.local.NavigationPanel;
