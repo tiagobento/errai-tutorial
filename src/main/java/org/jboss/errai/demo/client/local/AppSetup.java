@@ -40,7 +40,6 @@ import static elemental2.dom.DomGlobal.document;
  * container is initialized.
  */
 @EntryPoint
-@ErraiApp
 public class AppSetup {
 
   @Inject

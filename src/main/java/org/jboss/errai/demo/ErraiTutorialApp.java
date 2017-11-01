@@ -16,9 +16,15 @@
 
 package org.jboss.errai.demo;
 
+import org.jboss.errai.common.apt.ErraiAptCompatible;
+import org.jboss.errai.common.configuration.ErraiApp;
+import org.jboss.errai.common.configuration.ErraiModule;
+
 /**
  * @author Tiago Bento <tfernand@redhat.com>
  */
-@org.jboss.errai.common.configuration.ErraiModule
-public class ErraiModule {
+@ErraiAptCompatible(gwtModuleName = "org.jboss.errai.demo.App", erraiApp = ErraiTutorialApp.class)
+@ErraiApp
+@ErraiModule
+public class ErraiTutorialApp {
 }
