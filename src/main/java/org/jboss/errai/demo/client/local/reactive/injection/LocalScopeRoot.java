@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Red Hat, Inc. and/or its affiliates.
+ * Copyright (C) 2018 Red Hat, Inc. and/or its affiliates.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,21 +14,8 @@
  * limitations under the License.
  */
 
-package org.jboss.errai.demo.client.local;
+package org.jboss.errai.demo.client.local.reactive.injection;
 
-import javax.enterprise.inject.Produces;
-import javax.inject.Singleton;
-
-import elemental2.dom.DomGlobal;
-import elemental2.dom.HTMLDocument;
-
-/**
- * <p>
- * CDI producers for objects in {@link DomGlobal}.
- */
-public class Elemental2Producer {
-
-  @Produces @Singleton
-  public static final HTMLDocument document = DomGlobal.document;
+public @interface LocalScopeRoot {
 
 }

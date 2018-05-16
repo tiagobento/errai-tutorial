@@ -14,35 +14,31 @@
  * limitations under the License.
  */
 
-package org.jboss.errai.demo.client.local;
+package org.jboss.errai.demo.client.local.components;
 
-import elemental2.dom.HTMLElement;
-import jsinterop.annotations.JsPackage;
+import org.jboss.errai.common.client.api.annotations.Element;
+import org.jboss.errai.common.client.dom.HTMLElement;
+import org.jboss.errai.common.client.ui.HasValue;
+
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
-import org.jboss.errai.common.client.api.annotations.Element;
-import org.jboss.errai.common.client.ui.HasValue;
 
 /**
  * <p>
- * A wrapper using Elemental2 API for the Polymer paper-input element.
- * <p>
+ * A wrapper using Errai DOM wrappers API for the Polymer paper-textarea element.
+ *
  * <p>
  * Implements {@link HasValue} with {@link JsProperty} methods so that Errai data-binding binds to the {@code value}
  * property of this element.
  *
  * @author Max Barkley <mbarkley@redhat.com>
  */
-@Element("paper-input")
-@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "HTMLElement")
-public abstract class PaperInput extends HTMLElement implements HasValue<String> {
+@Element("paper-textarea")
+@JsType(isNative = true)
+public interface PaperTextArea extends HTMLElement, HasValue<String> {
 
-  @Override
-  @JsProperty
-  public abstract String getValue();
+  @Override @JsProperty String getValue();
+  @Override @JsProperty void setValue(String value);
 
-  @Override
-  @JsProperty
-  public abstract void setValue(String value);
 
 }

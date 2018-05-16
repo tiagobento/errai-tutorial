@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.jboss.errai.demo.client.local;
+package org.jboss.errai.demo.client.local.components;
 
 import elemental2.dom.HTMLAnchorElement;
 import jsinterop.annotations.JsOverlay;

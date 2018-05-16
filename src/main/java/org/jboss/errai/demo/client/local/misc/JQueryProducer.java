@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.jboss.errai.demo.client.local;
+package org.jboss.errai.demo.client.local.misc;
 
 import elemental2.dom.Element;
 import elemental2.dom.HTMLElement;
@@ -22,6 +22,7 @@ import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
+import org.jboss.errai.demo.client.local.AppSetup;
 
 import javax.enterprise.inject.Produces;
 
@@ -57,13 +58,13 @@ public abstract class JQueryProducer {
    */
   @JsType(isNative = true)
   public static abstract class JQueryElement extends HTMLElement {
-    abstract void after(HTMLElement element);
+    public abstract void after(HTMLElement element);
 
-    abstract void before(HTMLElement element);
+    public abstract void before(HTMLElement element);
 
-    abstract JQueryArray children();
+    public abstract JQueryArray children();
 
-    abstract JQueryArray children(String selector);
+    public abstract JQueryArray children(String selector);
   }
 
   /**

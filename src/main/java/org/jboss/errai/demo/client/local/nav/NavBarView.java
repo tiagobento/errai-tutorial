@@ -14,23 +14,29 @@
  * limitations under the License.
  */
 
-package org.jboss.errai.demo.client.local;
+package org.jboss.errai.demo.client.local.nav;
 
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import elemental2.dom.HTMLAnchorElement;
 import elemental2.dom.HTMLElement;
 import elemental2.dom.HTMLUListElement;
-import elemental2.dom.Node;
+import org.jboss.errai.demo.client.local.AppSetup;
+import org.jboss.errai.demo.client.local.nav.NavBarViewController.Props;
+import org.jboss.errai.demo.client.local.reactive.lists.RListView;
+import org.jboss.errai.demo.client.local.reactive.model.RStore.NoState;
+import org.jboss.errai.demo.client.local.reactive.model.RView;
+import org.jboss.errai.demo.client.local.reactive.model.RViewController;
 import org.jboss.errai.demo.client.shared.Contact;
-import org.jboss.errai.ui.client.local.api.elemental2.IsElement;
+import org.jboss.errai.ioc.client.api.ManagedInstance;
 import org.jboss.errai.ui.shared.api.annotations.Bound;
 import org.jboss.errai.ui.shared.api.annotations.DataField;
 import org.jboss.errai.ui.shared.api.annotations.Templated;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
-import java.util.Optional;
-
-import static elemental2.dom.DomGlobal.document;
+import static org.jboss.errai.demo.client.local.nav.NavBarViewController.State;
 
 /**
  * <p>
@@ -54,35 +60,45 @@ import static elemental2.dom.DomGlobal.document;
  * bean, or by programmatic lookup through the bean manager.
  */
 @ApplicationScoped
-@Templated("contact-page.html#navbar")
-public class NavBar implements IsElement {
+@Templated("../contact/contact-page.html#navbar")
+public class NavBarView implements RView<Props, State> {
 
-  @Inject
-  @Named("nav")
-  @DataField
-  private HTMLElement navbar;
+    @Inject
+    @Named("nav")
+    @DataField("navbar")
+    private HTMLElement navbar;
 
-  @Inject
-  @DataField
-  private HTMLUListElement navlist;
+    @Inject
+    @DataField("navlist")
+    private HTMLUListElement navList;
 
-  @Override
-  public HTMLElement getElement() {
-    return navbar;
-  }
+    @Inject
+    private RListView<HTMLAnchorElement, NavBarLinkView.Props, NoState> linksView;
 
-  public void add(final HTMLElement element) {
-    final HTMLElement li = (HTMLElement) document.createElement("li");
-    li.appendChild(element);
-    navlist.appendChild(li);
-  }
+    @Inject
+    private ManagedInstance<NavBarLinkView> linkViewFactory;
 
-  public void remove(final HTMLElement element) {
-    Optional.ofNullable(element.parentNode)
-            .filter(n -> n.nodeType == Node.ELEMENT_NODE)
-            .map(n -> (HTMLElement) n)
-            .filter(e -> "li".equalsIgnoreCase(e.tagName))
-            .filter(e -> e.parentNode == navlist)
-            .ifPresent(e -> navlist.removeChild(e));
-  }
+    @Inject
+    private NavBarViewController controller;
+
+    @Override
+    public HTMLElement getElement() {
+        return navbar;
+    }
+
+    @Override
+    public RViewController getController() {
+        return controller;
+    }
+
+    @PostConstruct
+    public void init() {
+        linksView.init(navList, linkViewFactory::get);
+        render(new NavBarViewStore.PropsImpl());
+    }
+
+    @Override
+    public void render(final Props props, final State state) {
+        linksView.render(state.links(), NavBarLinkViewStore.PropsImpl::new);
+    }
 }

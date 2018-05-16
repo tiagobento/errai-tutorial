@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.jboss.errai.demo.client.local;
+package org.jboss.errai.demo.client.local.misc;
 
 import elemental2.dom.MouseEvent;
 

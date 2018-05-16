@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.jboss.errai.demo.client.local;
+package org.jboss.errai.demo.client.local.components;
 
 import org.jboss.errai.common.client.api.annotations.Element;
 import org.jboss.errai.common.client.dom.Anchor;

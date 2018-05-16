@@ -16,21 +16,21 @@
 
 package org.jboss.errai.demo.client.local;
 
-import com.google.gwt.user.client.ui.RootPanel;
-
-import elemental2.dom.HTMLDocument;
-
-import org.jboss.errai.demo.client.local.JQueryProducer.JQuery;
-import org.jboss.errai.ioc.client.api.EntryPoint;
-import org.jboss.errai.ui.nav.client.local.NavigationPanel;
-
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
+import com.google.gwt.user.client.ui.RootPanel;
+import elemental2.dom.HTMLDocument;
+import org.jboss.errai.demo.client.local.misc.JQueryProducer.JQuery;
+import org.jboss.errai.demo.client.local.nav.NavBarView;
+import org.jboss.errai.demo.client.local.nav.NavBarViewStore;
+import org.jboss.errai.ioc.client.api.EntryPoint;
+import org.jboss.errai.ui.nav.client.local.NavigationPanel;
+
 /**
  * <p>
- * This bean attaches the {@link NavBar} and {@link NavigationPanel} when the application starts.
+ * This bean attaches the {@link NavBarView} and {@link NavigationPanel} when the application starts.
  * <p>
  * <p>
  * The {@link EntryPoint} scope is like {@link ApplicationScoped} except that entry points are eagerly initilialized
@@ -40,22 +40,24 @@ import javax.inject.Inject;
 @EntryPoint
 public class AppSetup {
 
-  @Inject
-  private NavigationPanel navPanel;
+    @Inject
+    private NavigationPanel navPanel;
 
-  @Inject
-  private NavBar navbar;
+    @Inject
+    private JQuery $;
 
-  @Inject
-  private JQuery $;
+    @Inject
+    private HTMLDocument document;
 
-  @Inject
-  private HTMLDocument document;
+    @Inject
+    private NavBarView navBarView;
 
-  @PostConstruct
-  public void init() {
-    RootPanel.get("rootPanel").add(navPanel);
-    $.wrap($.wrap(document.body).children().first()).before(navbar.getElement());
-  }
+    @PostConstruct
+    public void init() {
 
+        RootPanel.get("rootPanel").add(navPanel);
+
+        navBarView.render(new NavBarViewStore.PropsImpl());
+        $.wrap($.wrap(document.body).children().first()).before(navBarView.getElement());
+    }
 }
